@@ -1,0 +1,29 @@
+{
+  "name": "gulp-bootstrap-starter-projects",
+  "version": "1.0.0",
+  "description": "Get started with Bootstrap to build any project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PyColors/gulp-bootstrap-starter-projects.git"
+  },
+  "keywords": [
+    "template",
+    "theme",
+    "bootstrap",
+    "HTML",
+    "CSS",
+    "SCSS",
+    "Gulp",
+    "Browserslist"
+  ],
+  "author": "Py Colors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PyColors/gulp-bootstrap-starter-projects/issues"
+  },
+  "homepage": "https://github.com/PyColors/gulp-bootstrap-starter-projects#readme"
+}
