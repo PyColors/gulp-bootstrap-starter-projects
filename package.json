@@ -4,7 +4,7 @@
   "description": "Get started with Bootstrap to build any project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node_modules/.bin/gulp watch"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
   "homepage": "https://github.com/PyColors/gulp-bootstrap-starter-projects#readme",
   "dependencies": {
     "bootstrap": "^4.6.0",
+    "del": "^6.0.0",
     "jquery": "^3.6.0"
   },
   "devDependencies": {
