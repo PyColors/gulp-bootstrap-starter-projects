@@ -1,3 +1,6 @@
+# Vendor
+/vendor
+
 # compiled output
 /dist
 /tmp
