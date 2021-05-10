@@ -1,14 +1,29 @@
-import autoprefixer from "gulp-autoprefixer";
+const autoprefixer = require("gulp-autoprefixer");
 const browsersync = require("browser-sync").create();
-import cleanCSS from "gulp-clean-css";
-import del from "del";
-import { src, dest, watch as __watch, series, parallel } from "gulp";
-import header from "gulp-header";
-import merge from "merge-stream";
-import plumber from "gulp-plumber";
-import rename from "gulp-rename";
-import sass, { logError } from "gulp-sass";
+const cleanCSS = require("gulp-clean-css");
+const del = require("del");
+const gulp = require("gulp");
+const header = require("gulp-header");
+const merge = require("merge-stream");
+const plumber = require("gulp-plumber");
+const rename = require("gulp-rename");
+const sass = require("gulp-sass");
 
+// Load package.json for banner
+const pkg = require("./package.json");
+
+// Set the banner content
+const banner = [
+  "/*!\n",
+  " * Py Templates - <%= pkg.title %> v<%= pkg.version %> (<%= pkg.homepage %>)\n",
+  " * Copyright 2012-" + new Date().getFullYear(),
+  " <%= pkg.author %>\n",
+  " * Licensed under <%= pkg.license %> (https://github.com/gulp-bootstrap-starter-projects/<%= pkg.name %>/blob/master/LICENSE)\n",
+  " */\n",
+  "\n"
+].join("");
+
+// BrowserSync
 function browserSync(done) {
   browsersync.init({
     server: {
@@ -30,20 +45,25 @@ function clean() {
   return del(["./vendor/"]);
 }
 
+// Bring third party dependencies from node_modules into vendor directory
 function modules() {
-  var bootstrap = src("./node_modules/bootstrap/dist/**/*").pipe(
-    dest("./vendor/bootstrap")
-  );
+  var bootstrap = gulp
+    .src("./node_modules/bootstrap/dist/**/*")
+    .pipe(gulp.dest("./vendor/bootstrap"));
 
-  var jquery = src([
-    "./node_modules/jquery/dist/*",
-    "!./node_modules/jquery/dist/core.js"
-  ]).pipe(dest("./vendor/jquery"));
+  var jquery = gulp
+    .src([
+      "./node_modules/jquery/dist/*",
+      "!./node_modules/jquery/dist/core.js"
+    ])
+    .pipe(gulp.dest("./vendor/jquery"));
   return merge(bootstrap, jquery);
 }
 
+// CSS task
 function css() {
-  return src("./scss/**/*.scss")
+  return gulp
+    .src("./scss/**/*.scss")
     .pipe(plumber())
     .pipe(
       sass({
@@ -51,42 +71,43 @@ function css() {
         includePaths: "./node_modules"
       })
     )
-    .on("error", logError)
+    .on("error", sass.logError)
     .pipe(
       autoprefixer({
         cascade: false
       })
     )
-
-    .pipe(dest("./css"))
+    .pipe(
+      header(banner, {
+        pkg: pkg
+      })
+    )
+    .pipe(gulp.dest("./css"))
     .pipe(
       rename({
         suffix: ".min"
       })
     )
     .pipe(cleanCSS())
-    .pipe(dest("./css"))
+    .pipe(gulp.dest("./css"))
     .pipe(browsersync.stream());
 }
 
+// Watching files
 function watchFiles() {
-  __watch("./scss/**/*", css);
-  __watch("./**/*.html", browserSyncReload);
+  gulp.watch("./scss/**/*", css);
+  gulp.watch("./**/*.html", browserSyncReload);
 }
 
-const vendor = series(clean, modules);
-const build = series(vendor, css);
-const watch = series(build, parallel(watchFiles, browserSync));
+// Tasks
+const vendor = gulp.series(clean, modules);
+const build = gulp.series(vendor, css);
+const watch = gulp.series(build, gulp.parallel(watchFiles, browserSync));
 
-const _css = css;
-export { _css as css };
-const _clean = clean;
-export { _clean as clean };
-const _vendor = vendor;
-export { _vendor as vendor };
-const _build = build;
-export { _build as build };
-const _watch = watch;
-export { _watch as watch };
-const _default = build;
-export { _default as default };
+// Export tasks
+exports.css = css;
+exports.clean = clean;
+exports.vendor = vendor;
+exports.build = build;
+exports.watch = watch;
+exports.default = build;
