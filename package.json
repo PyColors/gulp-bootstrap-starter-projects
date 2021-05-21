@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/PyColors/gulp-bootstrap-starter-projects#readme",
   "dependencies": {
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.0.1",
     "del": "^6.0.0",
     "jquery": "^3.6.0"
   },
