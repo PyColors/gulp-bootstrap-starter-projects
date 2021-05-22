@@ -4,45 +4,7 @@
  * Licensed under MIT (https://github.com/gulp-bootstrap-starter-projects/gulp-bootstrap-starter-projects/blob/master/LICENSE)
  */
 
-.nav-scroller {
-  position: relative;
-  z-index: 2;
-  height: 2.75rem;
-  overflow-y: hidden;
-}
-
-.nav-scroller .nav {
-  display: flex;
-  flex-wrap: nowrap;
-  padding-bottom: 1rem;
-  margin-top: -1px;
-  overflow-x: auto;
-  text-align: center;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
-
-.nav-scroller .nav-link {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-size: 0.875rem;
-}
-
 /* stylelint-disable selector-list-comma-newline-after */
-.blog-header {
-  line-height: 1;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.blog-header-logo {
-  font-family: "Raleway", Georgia, "Times New Roman", serif;
-  font-size: 2.25rem;
-}
-
-.blog-header-logo:hover {
-  text-decoration: none;
-}
-
 h1,
 h2,
 h3,
@@ -81,35 +43,67 @@ h6 {
   }
 }
 
-/* Pagination */
-.blog-pagination {
-  margin-bottom: 4rem;
+.blog-header {
+  line-height: 1;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.blog-pagination > .btn {
-  border-radius: 2rem;
+.blog-header .blog-header-logo {
+  font-family: "Raleway", Georgia, "Times New Roman", serif;
+  font-size: 2.25rem;
+  text-decoration: none;
 }
 
-/*
- * Blog posts
- */
+.blog-header .blog-header-logo:hover {
+  text-decoration: underline;
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-scroller .nav-link {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+
 .blog-post {
   margin-bottom: 4rem;
 }
 
-.blog-post-title {
+.blog-post .blog-post-title {
   margin-bottom: 0.25rem;
   font-size: 2.5rem;
 }
 
-.blog-post-meta {
+.blog-post .blog-post-meta {
   margin-bottom: 1.25rem;
   color: #727272;
 }
 
-/*
- * Footer
- */
+.blog-pagination {
+  margin-bottom: 4rem;
+}
+
+.blog-pagination .btn {
+  border-radius: 2rem;
+}
+
 .blog-footer {
   padding: 2.5rem 0;
   color: #727272;
